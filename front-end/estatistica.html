@@ -10,20 +10,32 @@
 </head>
 <body>
     <header class="header"><a href="/front-end/index.html"><img src="/assets/logo.png"alt=""></a></header>
-    <h1>Estátistica</h1>
-    <hr>
-    <main class="mb-3>
-        <label for="p1">p1:</label>
-        <input type="number" class="form-control-sm" placeholder = "Nota:" name="primeira prova"id="p1">
-        <label for="p2">p2:</label>
-        <input type="number" class="form-control-sm" placeholder = "Nota:" name="segunda prova"id="p2">
-        <label for="t1">t1:</label>
-        <input type="number" class="form-control-sm" placeholder = "Nota:" name="primeiro trabalho"id="t1">
-        <label for="t2">t2:</label>
-        <input type="number" class="form-control-sm" placeholder = "Nota:" name="segundo trabalho"id="t2">
-
-        <button type="button" class="btn btn-outline-primary" id="botaoEnviar">Enviar</button>
-        <p id="resultadoDisplay"></p>
+    <main class="main"> 
+        <div class="container">
+                <h1>Estátistica</h1>
+                <hr>
+                <div class="row">
+                    <div class = "col-3">
+                        <label for="p1">P1:</label>
+                        <input type="number" class="form-control-sm" placeholder = "Nota:" name="primeira prova"id="p1">
+                    </div>
+                    <div class = "col-3">
+                        <label for="p2">P2:</label>
+                        <input type="number" class="form-control-sm" placeholder = "Nota:" name="segunda prova"id="p2">
+                    </div>
+                    <div class = "col-3">
+                        <label for="t1">T1:</label>
+                        <input type="number" class="form-control-sm" placeholder = "Nota:" name="primeiro trabalho"id="t1">
+                    </div> 
+                    <div class = "col-3">
+                        <label for="t2">T2:</label>
+                        <input type="number" class="form-control-sm" placeholder = "Nota:" name="segundo trabalho"id="t2">
+                    </div>
+                </div>
+                <hr>
+                <button type="button" class="btn btn-outline-primary d-block mx-auto" id="botaoEnviar">Enviar</button>
+                <p class = "" id="resultadoDisplay"></p>
+        </div>
     </main>
     
     <script src="/back-end/calculoMedia.js"></script>

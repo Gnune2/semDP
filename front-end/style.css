@@ -19,3 +19,6 @@ body {
     height: auto; 
     width: auto;
 }
+.main {
+    height: 100%;
+}
