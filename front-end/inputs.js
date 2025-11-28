@@ -48,6 +48,7 @@ for (const i of notas) {
     }
     input.id = i;
 }
+//botão para enviar os inputs para calcular a média
 const botao = document.getElementById("container");
 const botaoEnviar = document.createElement("button");
 botao.appendChild(botaoEnviar);
@@ -55,10 +56,11 @@ botaoEnviar.type = "button"
 botaoEnviar.className = "btn btn-outline-primary d-block mx-auto";
 botaoEnviar.id = "botaoEnviar";
 botaoEnviar.textContent = "Enviar";
+// texto que mostra o resultado final
 const resultado = document.getElementById("container");
 const p = document.createElement("p");
 resultado.appendChild(p);
 p.className = "";
 p.id = "resultadoDisplay";
-
+// atualiza nome da página
 document.title = `${materia}`;
