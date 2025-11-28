@@ -31,7 +31,6 @@ const materias = [
     }
 ];
 
-
 function divMaterias(materias) {
     
     for (const materia of materias) {
