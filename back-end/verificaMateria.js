@@ -4,6 +4,5 @@ botoesLinks.forEach(botao => {
         const botaoClicado = event.target.title;
         localStorage.setItem("materiaEscolhida", botaoClicado);
         console.log("Você clicou na matéria:", botaoClicado);
-        
     })
 })
