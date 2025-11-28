@@ -38,6 +38,13 @@ body {
     width: 70%;
     padding: 2em;
 }
+.main {
+    background-color: var(--cor-main);
+    height: 90vh;
+    width: 70%;
+    margin: auto;
+    padding: 2em;
+}
 
 @media screen and ( max-width:400px){
     .main-index {

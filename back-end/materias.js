@@ -16,7 +16,7 @@ const materias = [
     },
     {
         id: 4,
-        nome: "UX",
+        nome: "Interface e experiência do usuário",
         Imagem:"Matemática Discreta",
     },
     {
@@ -26,19 +26,19 @@ const materias = [
     }
 ];
 
-function divMaterias(materias){
+
+function divMaterias(materias) {
     const div = document.getElementById('main-index');
-    for(let i = 0; i < materias.length; i++) {
-        const materia = materias[i];
+    for (const materia of materias) {
         const divMateria = document.createElement("div");
-        divMateria.id = `materia-${materia}`;
-        divMateria.className = `estilo-${materia}`;
-        divMateria.textContent = `${materia}`;
-        if (div) {
+        divMateria.id = `materia-${materia.id}`
+        divMateria.className = "materias"
+        divMateria.textContent = `${materia.nome}`
+        if (div){
             div.appendChild(divMateria);
             console.log("A div foi anexada com sucesso!");
         }
-    }
+    }   
 }
 
 divMaterias(materias);
