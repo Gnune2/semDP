@@ -2,7 +2,6 @@ const p1_nota = document.getElementById("p1");
 const p2_nota  = document.getElementById("p2");
 const t1_nota  = document.getElementById("t1");
 const t2_nota  = document.getElementById("t2");
-const botaoEnviar = document.getElementById("botaoEnviar");
 const resultadoDisplay = document.getElementById("resultadoDisplay");
 
 function enviarNotas() {

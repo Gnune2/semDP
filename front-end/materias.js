@@ -71,12 +71,16 @@ function divMaterias(materias) {
         const botao = document.getElementById(CardBodyMateria.id);
         const botaoLink = document.createElement("a");
         botaoLink.textContent = "Calcular Média"
-        botaoLink.className = "btn btn-outline-primary btn-sm mt-auto"
-        botaoLink.href = `${materia.pagina}`
+        botaoLink.className = "btn btn-outline-primary btn-sm mt-auto btno"
+        botaoLink.id = `${materia.id}`
+        botaoLink.setAttribute("title",`${materia.nome}`);
+        botaoLink.href = "/front-end/calculomedia.html"
         if (botao){
             botao.appendChild(botaoLink);
         }
     }   
 }
-
 divMaterias(materias);
+
+
+

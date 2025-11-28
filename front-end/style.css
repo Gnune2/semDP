@@ -46,6 +46,9 @@ img{
 #materias {
     min-height: 350px;
 }
+input{
+    color: black
+}
 /* responsividade*/
 @media screen and (max-width:1400px){
 }
