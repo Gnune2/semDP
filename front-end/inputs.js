@@ -57,7 +57,7 @@ const botao = document.getElementById("container");
 const botaoEnviar = document.createElement("button");
 botao.appendChild(botaoEnviar);
 botaoEnviar.type = "button"
-botaoEnviar.className = "btn btn-outline-primary mt-5";
+botaoEnviar.className = "btn btn-outline-primary mt-2";
 botaoEnviar.id = "botaoEnviar";
 botaoEnviar.textContent = "Calcular Média";
 // texto que mostra o resultado final
