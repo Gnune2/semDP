@@ -47,6 +47,7 @@ img{
     min-height: 350px;
 }
 input{
+    max-width: 200px;
     color: black
 }
 /* responsividade*/
@@ -62,7 +63,7 @@ input{
     .materias {
         width: 50%;
     }
-    .main-index {
+    .main {
         width: 100%;
     }  
 }

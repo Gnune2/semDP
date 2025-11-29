@@ -29,7 +29,7 @@ for (const i of notas) {
     const divNota = document.createElement("div");
     //coloca a div nota na div que queria colocar e define classe bootstrap
     divColocarInputs.appendChild(divNota);
-    divNota.className = "col-6 mb-5";
+    divNota.className = "col-12 mb-4 d-flex align-items-center justify-content-center";
     //cria e coloca label para input
     const label = document.createElement("label");
     divNota.appendChild(label);
@@ -39,7 +39,7 @@ for (const i of notas) {
     const input = document.createElement("input");
     divNota.appendChild(input);
     input.type = "number";
-    input.className = "form-control-sm";
+    input.className = "form-control m-2";
     input.placeholder = "Nota:"
     if (i[0] === "p"){
         input.name = `${i[1]}ª prova`;
@@ -53,7 +53,7 @@ const botao = document.getElementById("container");
 const botaoEnviar = document.createElement("button");
 botao.appendChild(botaoEnviar);
 botaoEnviar.type = "button"
-botaoEnviar.className = "btn btn-outline-primary d-block mx-auto";
+botaoEnviar.className = "btn btn-outline-primary mt-5";
 botaoEnviar.id = "botaoEnviar";
 botaoEnviar.textContent = "Enviar";
 // texto que mostra o resultado final
