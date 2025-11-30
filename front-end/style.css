@@ -53,6 +53,10 @@ input{
 .hrcards {
     display: none;
 }
+.login{
+    background-color: var(--cor-header);
+    border-radius: 10px;
+}
 /* responsividade*/
 @media screen and (max-width:1400px){
 }
