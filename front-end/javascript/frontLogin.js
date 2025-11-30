@@ -57,7 +57,7 @@ for (const i of emailsenha){
 //adiciona link para cadastro
     const linkCadastro = document.createElement("a");
     form.appendChild(linkCadastro);
-    linkCadastro.href = "#";
+    linkCadastro.href = "cadastro.html";
     linkCadastro.id = "botaoCadastro";
     linkCadastro.className = "btn btn-secondary";
     linkCadastro.textContent = "Cadastrar-se";

@@ -73,7 +73,7 @@ function cardMaterias(materias) {
         botaoLink.className = "btn btn-outline-primary btn-sm mt-auto btno"
         botaoLink.id = `${materia.id}`
         botaoLink.setAttribute("title",`${materia.nome}`);
-        botaoLink.href = "/front-end/calculomedia.html"
+        botaoLink.href = "/front-end/html/calculoMedia.html";
         if (botao){
             botao.appendChild(botaoLink);
         }
