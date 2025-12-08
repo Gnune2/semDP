@@ -2,9 +2,10 @@
   "name": "media-imt",
   "version": "1.0.0",
   "description": "calcula médias das matérias",
-  "main": "/front-end/html/index.html",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "keywords": [
     "Medias, Notas, Faculdade"
