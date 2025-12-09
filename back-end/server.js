@@ -68,3 +68,35 @@ app.post("/cadastro", async(req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor ao tentar registar.' });
     }
 })
+
+//rota para login
+app.post("/login", async(req, res) =>{
+    const {password, email} = req.body
+    if (!password || !email) {
+        return res.status(400).json({error:"Email e senha são obrigatórios."})
+    }
+    try {
+        const student = await prisma.student.findUnique({
+            where: {email: email},
+        })
+        if(!student){
+            return res.status(401).json({error: "Email não encontrado"})
+        }
+        const isPasswordValid = await bcrypt.compare(password, student.password);
+        if(!isPasswordValid){
+            return res.status(401),json({error: "Senha incorreta"})
+        }
+        res.status(200).json({
+            massage: "Login bem-sucedido!",
+            student: {
+                id: student.id,           
+                username: student.username, 
+                email: student.email, 
+            },
+        })
+    }catch (error){
+        console.error('Erro no processo de login:', error);
+        res.status(500).json({ error: 'Erro interno do servidor ao tentar fazer login.' });
+    }
+    
+})
