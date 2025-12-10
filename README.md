@@ -1,6 +1,6 @@
 # 🎓 Calculadora de Média Acadêmica (IMT)
 
-![Status Badge](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge) ![License](http://img.shields.io/static/v1?label=LICENSE&message=MIT&color=BLUE&style=for-the-badge)
+![Status Badge](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=111D2B&style=for-the-badge) ![License](http://img.shields.io/static/v1?label=LICENSE&message=MIT&color=0c1014&style=for-the-badge)
 
 Um sistema web Fullstack desenvolvido para auxiliar estudantes universitários no gerenciamento de notas e cálculo de médias ponderadas. O projeto permite a criação de contas, login seguro e personalização de matérias com pesos específicos para provas e trabalhos.
 
