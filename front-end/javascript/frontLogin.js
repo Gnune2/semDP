@@ -105,13 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         // recebe a reposta do servidor e armazena numa variavel
         const result = await response.json()
-        //mostra a reposta para o cliente pelo front
         if (response.ok){
             //guarda token no local storage do navegador
             if(result.token) {
                 localStorage.setItem("authToken", result.token);
                 console.log("Token de Autenticação Salvo", result.token);
             }
+            //mostra a reposta para o cliente pelo front
             //sim eu coloquei o emoji pra ficar mais legal
             alert('✅' + result.massage + result.token)
             // Redireciona para a página index
