@@ -1,3 +1,5 @@
+//importa dependencias
+const jwt = require('jsonwebtoken');
 // Middleware de Autenticação
 function authenticateToken(req, res, next) {
     //armazena token numa variavel
@@ -16,3 +18,4 @@ function authenticateToken(req, res, next) {
         next();
     })
 }
+module.exports = authenticateToken;

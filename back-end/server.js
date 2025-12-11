@@ -11,7 +11,7 @@ const PORT = 3000;
 
 //middlewares
 //token
-//const authenticateToken = require('./authMiddleware'); 
+const authenticateToken = require('./authMiddleware.js'); 
 //cors
 const corsOptions = {
     origin: 'http://127.0.0.1:5500', // Apenas a sua origem frontend está permitida
@@ -127,13 +127,37 @@ app.post("/login", async(req, res) =>{
 })
 //rota teste para middleware do token
 //Rota protegida: O Middleware é executado primeiro!
-app.get('/materiasStudent', authenticateToken, async (req, res) => {
+app.post('/materia', authenticateToken, async (req, res) => {
     // Se esta função for executada, o Token foi validado.
+    const { name, image, assessments } = req.body;
+
+    const studentId = req.student.studentId;
     
-    // req.student contém os dados do Payload: { studentId, email, name }
-    
-    res.status(200).json({
-        message: `Acesso liberado. Bem-vindo, ${req.student.name}!`,
-        profile: req.student 
-    });
+    if(!name){
+        return res.status(400).json({error: "O nome da matéria é obrigatório"})
+    }
+    try {
+        const newSubject = await prisma.subject.create({
+            data: {
+                name: name,
+                image: image || "",
+                student: {
+                    connect: { id: studentId }
+                },
+                assessments: {
+                    create: assessments
+                }
+            },
+            include: {
+                assessments: true
+            }
+        })
+        res.status(201).json({
+            message: "Matéria criado com sucesso!",
+            subject: newSubject
+        })
+    } catch (error) {
+        console.error("Erro ao criar matéria:", error);
+        res.status(500).json({ error: "Erro interno ao salvar a matéria."})
+    }
 });
