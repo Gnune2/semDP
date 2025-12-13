@@ -3,7 +3,7 @@ async function carregarMaterias() {
     try {
         // Agora usamos o fetchProtected direto!
         // Não precisa passar headers, ele resolve sozinho.
-        const response = await window.fetchProtected('http://localhost:3000/materia');
+        const response = await window.fetchProtected('https://media-imt.onrender.com/cadastro/materia');
 
         if (!response.ok) {
             throw new Error('Falha ao buscar matérias');
