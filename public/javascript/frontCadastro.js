@@ -65,7 +65,7 @@ for (const i of emailsenha){
 
 // varre os dados inseridos pelo estudante e manda para o servidor
 //link do servidor node express
-const BACKEND_URL = "https://media-imt.onrender.com/cadastro/cadastro";
+const BACKEND_URL = "https://media-imt.onrender.com/cadastro";
 //espera o html carregar para excutar o código seguinte
 document.addEventListener("DOMContentLoaded", () => {
     //pega o formulário e atribui a uma variavel
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             // erro na conexao
             console.error('Erro de conexão ou requisição:', error);
-            alert('🚨 Falha ao conectar ao servidor. Verifique se o backend está a correr (https://media-imt.onrender.com/cadastro).' );
+            alert('🚨 Falha ao conectar ao servidor. Verifique se o backend está a correr (https://media-imt.onrender.com).' );
         } finally {
             //Restaura o Botão, independentemente do sucesso ou falha
             submitButton.textContent = 'Cadastrar';

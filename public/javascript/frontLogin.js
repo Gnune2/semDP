@@ -69,7 +69,7 @@ for (const i of emailsenha){
     linkCadastro.textContent = "Cadastrar-se";
 
 //varre o forms pegando os dados e envia para o servidor para logar
-BACKEND_URL = "https://media-imt.onrender.com/cadastro/login"
+BACKEND_URL = "https://media-imt.onrender.com/login"
 //espera o html carregar para excutar o código seguinte
 document.addEventListener("DOMContentLoaded", () => {
     //pega o formulário e atribui a uma variavel
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             // erro na conexao
             console.error('Erro de conexão ou requisição:', error);
-            alert('🚨 Falha ao conectar ao servidor. Verifique se o backend está a correr (https://media-imt.onrender.com/cadastro).' );
+            alert('🚨 Falha ao conectar ao servidor. Verifique se o backend está a correr (https://media-imt.onrender.com).' );
         } finally {
             //Restaura o Botão, independentemente do sucesso ou falha
             submitButton.textContent = 'Login';
