@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 //sim eu coloquei o emoji pra ficar mais legal
                 alert('✅ Sucesso! ' + result.massage + "\nAgora faça o login")
                 // Redirecionar para a página de login após o cadastro
-                window.location.href = '/front-end/html/login.html';
+                window.location.href = '/public/pages/login.html';
             }else{
                 alert('❌ Erro no Cadastro: ' + (result.error || 'Ocorreu um erro desconhecido.'));
             }
