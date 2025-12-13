@@ -13,7 +13,7 @@ const materiaRoutes = require('./routes/materiaRoutes');
 //     optionsSuccessStatus: 200 
 // };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(express.json());
 
 // Definição das Rotas
