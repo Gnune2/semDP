@@ -1,5 +1,5 @@
 {
-  "name": "media-imt",
+  "name": "semdp",
   "version": "1.0.0",
   "description": "calcula médias das matérias",
   "main": "src/server.js", 
