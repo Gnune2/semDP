@@ -1,0 +1,26 @@
+{
+  "name": "media-imt",
+  "version": "1.0.0",
+  "description": "calcula médias das matérias",
+  "main": "back-end/server.js", 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon back-end/server.js"
+  },
+  "keywords": [
+    "Medias, Notas, Faculdade"
+  ],
+  "author": "Guilherme Nunes",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "6.19",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11",
+    "prisma": "6.19"
+  }
+}
