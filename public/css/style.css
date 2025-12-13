@@ -25,16 +25,12 @@ body {
     padding-inline: 1.5em;
     align-items: center;
 }
-.header a {
+.logo {
     display: flex;
     position: relative;
     height: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
-.buttonProfile{
-    background-color: transparent;
-    border: none;
+.perfil{
     font-size: 30px;
 }
 .main{
