@@ -7,32 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//O Aluno
+// O Aluno
 model Student {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
   studentName  String
-  email String @unique
-  password String
-  createdAt DateTime @default(now())
-  subjects Subject[]
+  email        String    @unique
+  password     String
+  createdAt    DateTime  @default(now())
+  subjects     Subject[]
 }
 
-//A Matéria
+// A Matéria
 model Subject {
-  id        String       @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  image     String?      
-  studentId String       @db.ObjectId
-  student   Student      @relation(fields: [studentId], references: [id])
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  image       String?      
+  passGrade   Float        @default(6.0) // ADICIONA ESTA LINHA
+  studentId   String       @db.ObjectId
+  student     Student      @relation(fields: [studentId], references: [id])
   assessments Assessment[]
 }
 
-//A Avaliação (Provas e Trabalhos)
+// A Avaliação (Provas e Trabalhos)
 model Assessment {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String  
   grade     Float?  
   weight    Float   
-  subjectId String  @db.ObjectId
-  subject   Subject @relation(fields: [subjectId], references: [id])
+  subjectId String   @db.ObjectId
+  subject   Subject  @relation(fields: [subjectId], references: [id])
 }
