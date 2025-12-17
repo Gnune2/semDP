@@ -5,26 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>semDP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="shortcut icon" href="/public/assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- scripts -->
+
     <script src="/public/javascript/config.js"></script>
     <script src="/public/javascript/token.js"></script>
+    <script src="/public/javascript/frontIndex.js" defer></script>
 </head>
 <body>
     
-    <!-- cabeçalho -->
     <header class="header">
-    <a href="/public/index.html" class = "logo">
-        <img src="/public/assets/logo2.png"alt="logo" title="Página Inicial">
-    </a>
-
-    <a href="pages/perfil.html"  class = "perfil" id="fetch-profile"><i class="fa-solid fa-user"></i></a>
+        <a href="/public/index.html" class="logo">
+            <img src="/public/assets/logo2.png" alt="logo" title="Página Inicial">
+        </a>
+        <a href="pages/perfil.html" class="perfil" id="fetch-profile">
+            <i class="fa-solid fa-user"></i>
+        </a>
     </header>
 
-    <!-- conteudo/main -->
     <main class="main" id="main"> 
         <div class="container">
             <div class="row d-flex justify-content-around text-center mb-4">
@@ -32,73 +32,93 @@
                 <hr>
                 <h2>Escolha a matéria:</h2>
             </div>
-            <!-- Matérias são carregadas nessa div -->
+
             <div class="row d-flex justify-content-around" id="materias">
-            </div>
-            <button type="button" class="btn btn-outline-primary" onclick="meuModal.showModal()">Nova matéria +</button>
-        </div>
-    </main>
-    
-</body>
-        <dialog id="meuModal">
-    <main>
-        <div class="container mt-5 text-white" style="max-width: 600px;">
-            <h2 class="text-center mb-4">Nova Matéria</h2>
-            
-            <form id="create-subject-form">
-                
-                <div class="mb-4">
-                    <label for="inputName" class="form-label">Nome da Disciplina</label>
-                    <input type="text" class="form-control" id="inputName" name="name" required placeholder="Ex: Física II">
                 </div>
 
-                <div class="mb-4">
+            <div class="mt-5">
+                <button type="button" class="btn btn-outline-primary btn-lg" onclick="document.getElementById('meuModal').showModal()">
+                    <i class="fa-solid fa-plus"></i> Nova matéria
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <dialog id="meuModal">
+        <div class="container text-white" style="max-width: 500px;">
+            <h2 class="text-center mb-4">Nova Matéria</h2>
+            
+            <p class="text-white-50 small mb-3 text-start">* A soma dos pesos deve ser igual a 1.0</p>
+
+            <form id="create-subject-form">
+                <div class="mb-4 text-start">
+                    <label for="inputName" class="form-label">Nome da Disciplina</label>
+                    <input type="text" class="form-control bg-dark text-white border-secondary" id="inputName" name="name" required placeholder="Ex: Cálculo II">
+                </div>
+
+                <div class="mb-4 text-start">
                     <label for="inputImage" class="form-label">URL do Ícone (Opcional)</label>
-                    <input type="url" class="form-control" id="inputImage" name="image" placeholder="https://...">
-                    <div class="form-text text-white-50">Cole o link de uma imagem ou deixe em branco.</div>
+                    <input type="url" class="form-control bg-dark text-white border-secondary" id="inputImage" name="image" placeholder="https://...">
                 </div>
 
                 <hr class="my-4">
 
-                <h4 class="mb-3">Configuração de Notas</h4>
+                <h4 class="mb-3 text-start">Configuração de Notas</h4>
                 
                 <div id="notas">
-                    <fieldset class="border p-3 mb-3 rounded border-secondary">
-                    <legend class="float-none w-auto px-2 fs-6 text-info">Avaliação 1 (Ex: Provas)</legend>
-                    <div class="row g-2">
-                        <div class="col-8">
-                            <input type="text" class="form-control" name="assessmentName1" value="Provas" placeholder="Nome">
+                    <fieldset class="border p-3 mb-3 rounded border-secondary text-start">
+                        <legend class="float-none w-auto px-2 fs-6 text-info">Avaliação 1</legend>
+                        <div class="row g-2">
+                            <div class="col-8">
+                                <input type="text" class="form-control bg-dark text-white border-secondary" name="assessmentName" value="Provas" required>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class="form-control bg-dark text-white border-secondary" name="assessmentWeight" value="0.6" step="0.1" min="0" max="1" required>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <input type="number" class="form-control" name="assessmentWeight1" value="0.6" step="0.1" min="0" max="1" placeholder="Peso">
-                        </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
 
-                <fieldset class="border p-3 mb-4 rounded border-secondary">
-                    <legend class="float-none w-auto px-2 fs-6 text-info">Avaliação 2 (Ex: Trabalhos)</legend>
-                    <div class="row g-2">
-                        <div class="col-8">
-                            <input type="text" class="form-control" name="assessmentName2" value="Trabalhos" placeholder="Nome">
+                    <fieldset class="border p-3 mb-3 rounded border-secondary text-start">
+                        <legend class="float-none w-auto px-2 fs-6 text-info">Avaliação 2</legend>
+                        <div class="row g-2">
+                            <div class="col-8">
+                                <input type="text" class="form-control bg-dark text-white border-secondary" name="assessmentName" value="Trabalhos" required>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class="form-control bg-dark text-white border-secondary" name="assessmentWeight" value="0.4" step="0.1" min="0" max="1" required>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <input type="number" class="form-control" name="assessmentWeight2" value="0.4" step="0.1" min="0" max="1" placeholder="Peso">
-                        </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
                 </div>
 
-                <div class="d-grid gap-2">
-                    <div><button type="button" class="btn btn-outline-primary ">Nova nota +</button></div>
-                    <hr class="my-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Criar Matéria</button>
-                    <button class="btn btn-outline-secondary" onclick="meuModal.close()">Cancelar</button>
+                <div class="d-grid gap-2 mt-4">
+                    <button type="button" id="add-nota" class="btn btn-sm btn-outline-info mb-3">
+                        <i class="fa-solid fa-plus-circle"></i> Adicionar mais uma nota
+                    </button>
+                    <button type="submit" class="btn btn-primary">Criar Matéria</button>
+                    <button type="button" class="btn btn-link text-secondary" onclick="document.getElementById('meuModal').close()">Cancelar</button>
                 </div>
-
             </form>
         </div>
-        </dialog>
-<!-- scripts -->
-<script src ="/public/javascript/materias.js"></script>
-<script src ="/public/javascript/verificaMateria.js" defer></script>
+    </dialog>
+
+    <dialog id="modalNotas">
+        <div class="container text-white" style="max-width: 500px;">
+            <h2 id="tituloMateriaNota" class="text-center mb-4"></h2>
+            <form id="form-notas">
+                <div id="lista-notas-editar"></div>
+                <div class="text-center mt-4">
+                    <h3 class="text-info">Média Atual: <span id="mediaCalculada">0.0</span></h3>
+                </div>
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-success">Guardar Notas</button>
+                    <button type="button" class="btn btn-link text-secondary" onclick="document.getElementById('modalNotas').close()">Fechar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
+    <script src="/public/javascript/materias.js"></script>
+</body>
 </html>

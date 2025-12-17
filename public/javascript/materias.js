@@ -1,97 +1,146 @@
-// Função principal que busca os dados e desenha na tela
+// public/javascript/materias.js
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await carregarMaterias();
+});
+
 async function carregarMaterias() {
+    const cardContainer = document.getElementById("materias");
+    
     try {
-        // Agora usamos o fetchProtected direto!
-        // Não precisa passar headers, ele resolve sozinho.
+        // Busca as matérias do usuário logado usando o token de autenticação
         const response = await window.fetchProtected(`${API_BASE_URL}/materia`);
+        
+        if (!response.ok) throw new Error("Falha ao carregar matérias");
+        
+        const materias = await response.json();
 
-        if (!response.ok) {
-            throw new Error('Falha ao buscar matérias');
-        }
+        // Limpa apenas a área de cards, mantendo os títulos fixos do HTML
+        if (cardContainer) cardContainer.innerHTML = '';
 
-        const materiasDoBanco = await response.json();
-
-        // Chama a função de desenhar os cards (mantemos a mesma de antes)
-        cardMaterias(materiasDoBanco);
+        materias.forEach(materia => {
+            const card = criarCardMateria(materia);
+            cardContainer.appendChild(card);
+        });
 
     } catch (error) {
-        console.error("Erro no fluxo:", error);
-        // O fetchProtected já trata o redirecionamento se for erro de token,
-        // aqui tratamos outros erros (ex: servidor desligado)
+        console.error("Erro:", error);
+        if (cardContainer) {
+            cardContainer.innerHTML = `<p class="text-danger">Erro ao carregar matérias. Verifique sua conexão.</p>`;
+        }
     }
 }
 
-// ... (A função cardMaterias continua exatamente igual à anterior) ...
+function criarCardMateria(materia) {
+    const divCol = document.createElement("div");
+    divCol.className = "col-12 col-md-5 col-xl-3 p-2 mb-4";
+    divCol.id = `materia-${materia.id}`;
 
-// Inicializa
-document.addEventListener('DOMContentLoaded', carregarMaterias);
+    // Define a imagem padrão caso não exista uma URL
+    const imagemSrc = materia.image || '/public/assets/materias/padrao.png';
 
-// Função de criação dos Cards (Adaptada para os dados do Banco)
-function cardMaterias(materias) {
-    const cardContainer = document.getElementById('materias');
-    
-    // Limpa o container antes de adicionar para não duplicar se chamar 2x
-    if(cardContainer) cardContainer.innerHTML = ''; 
+    divCol.innerHTML = `
+        <div class="card h-100 bg-dark border-secondary shadow materias-card" style="cursor: pointer;">
+            <img src="${imagemSrc}" class="card-img-top p-3" alt="${materia.name}" style="height: 150px; object-fit: contain;">
+            <div class="card-body text-center d-flex flex-column justify-content-between">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="card-title text-white m-0">${materia.name}</h5>
+                    <button class="btn btn-sm text-danger p-0 delete-btn" title="Excluir Matéria">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+                <p class="card-text text-info small">Clique para ver as notas</p>
+                <button class="btn btn-primary w-100 mt-2">Calcular Média</button>
+            </div>
+        </div>
+    `;
 
-    // Usamos o index para a lógica da quebra de linha <hr>
-    materias.forEach((materia, index) => {
-        
-        // --- Criação do Card ---
-        const CardMateria = document.createElement("div");
-        CardMateria.id = `materia-${materia.id}`;
-        CardMateria.className = "materias col-12 col-md-5 col-xl-2 p-0 card d-flex flex-column mt-3 mb-5";
-        
-        if (cardContainer) {
-            cardContainer.appendChild(CardMateria);
-        }
-
-        // --- Imagem ---
-        // Se não tiver imagem no banco, usa uma padrão
-        const imagemSrc = materia.image ? materia.image : '/public/assets/materias/padrao.png';
-        
-        const imagem = document.createElement("img");
-        imagem.src = imagemSrc;
-        imagem.className = "card-img-top"; // Classe bootstrap para imagem ficar bonita no card
-        imagem.alt = `Imagem de ${materia.name}`;
-        
-        CardMateria.appendChild(imagem);
-
-        // --- Corpo do Card ---
-        const CardBodyMateria = document.createElement("div");
-        CardBodyMateria.className = "card-body p-2 d-flex flex-column flex-grow-1";
-        CardMateria.appendChild(CardBodyMateria);
-
-        // --- Nome da Matéria (Ajustado para 'name' do banco) ---
-        const nomeMateria = document.createElement("h5");
-        nomeMateria.textContent = materia.name; // O banco retorna 'name', não 'nome'
-        CardBodyMateria.appendChild(nomeMateria);
-
-        // --- Botão ---
-        const botaoLink = document.createElement("a");
-        botaoLink.textContent = "Calcular Média";
-        botaoLink.className = "btn btn-outline-primary btn-sm mt-auto btno";
-        botaoLink.id = materia.id;
-        botaoLink.setAttribute("title", materia.name);
-        
-        // IMPORTANTE: Passamos o ID via URL Parameter
-        botaoLink.href = `/public/pages/calculoMedia.html?id=${materia.id}`;
-
-        botaoLink.addEventListener('click', () => {
-            localStorage.setItem("materiaEscolhida", materia.name);
-        });
-
-        CardBodyMateria.appendChild(botaoLink);
-
-        // --- Lógica de Quebra de Linha (HR) ---
-        // Como o ID do banco agora é um texto longo (UUID), usamos o índice do array
-        // Se o índice + 1 for par, coloca a linha
-        if ((index + 1) % 2 === 0) {
-            const linhaQuebra = document.createElement("hr");
-            linhaQuebra.className = "hrcards";
-            cardContainer.appendChild(linhaQuebra);
-        }
+    // Evento para excluir a matéria
+    divCol.querySelector(".delete-btn").addEventListener("click", (e) => {
+        e.stopPropagation(); // Impede de abrir o modal de notas ao clicar no lixo
+        eliminarMateria(materia.id);
     });
+
+    // Evento para abrir o modal de edição de notas
+    divCol.querySelector(".card").addEventListener("click", () => {
+        abrirEdicaoNotas(materia);
+    });
+
+    return divCol;
 }
 
-// Inicializa a busca quando a página carrega
-document.addEventListener('DOMContentLoaded', carregarMaterias);
+async function eliminarMateria(id) {
+    if (!confirm("Deseja realmente excluir esta matéria e todas as suas notas?")) return;
+
+    try {
+        const response = await window.fetchProtected(`${API_BASE_URL}/materia/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            document.getElementById(`materia-${id}`).remove();
+        } else {
+            alert("Não foi possível excluir a matéria.");
+        }
+    } catch (error) {
+        console.error("Erro ao deletar:", error);
+    }
+}
+
+function abrirEdicaoNotas(materia) {
+    const modal = document.getElementById('modalNotas');
+    const container = document.getElementById('lista-notas-editar');
+    const titulo = document.getElementById('tituloMateriaNota');
+    
+    if (!modal || !container) return;
+
+    titulo.textContent = materia.name;
+    container.innerHTML = '';
+
+    // Gera os inputs de nota baseado no que foi configurado no banco
+    materia.assessments.forEach((av) => {
+        const div = document.createElement('div');
+        div.className = 'mb-3 text-start';
+        div.innerHTML = `
+            <label class="form-label text-info small">${av.name} (Peso: ${av.weight})</label>
+            <input type="number" class="form-control bg-dark text-white border-secondary nota-input" 
+                   data-weight="${av.weight}" 
+                   value="${av.grade || 0}" 
+                   step="0.1" min="0" max="10">
+        `;
+        container.appendChild(div);
+    });
+
+    // Escuta mudanças nos inputs para calcular a média em tempo real
+    container.querySelectorAll('.nota-input').forEach(input => {
+        input.addEventListener('input', calcularMediaRealTime);
+    });
+
+    calcularMediaRealTime();
+    modal.showModal();
+
+    // Configura o salvamento (Submit)
+    document.getElementById('form-notas').onsubmit = async (e) => {
+        e.preventDefault();
+        alert("Lógica de salvamento disparada! (Próxima etapa: Criar rota de Update no Backend)");
+        modal.close();
+    };
+}
+
+function calcularMediaRealTime() {
+    const inputs = document.querySelectorAll('.nota-input');
+    let media = 0;
+    
+    inputs.forEach(input => {
+        const nota = parseFloat(input.value) || 0;
+        const peso = parseFloat(input.dataset.weight) || 0;
+        media += nota * peso;
+    });
+
+    const displayMedia = document.getElementById('mediaCalculada');
+    if (displayMedia) {
+        displayMedia.textContent = media.toFixed(2);
+        // Muda a cor baseado na nota (Ex: 6.0 é a média de aprovação)
+        displayMedia.className = media >= 6 ? "text-success" : "text-danger";
+    }
+}
