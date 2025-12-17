@@ -1,33 +1,38 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    const nomeExibicao = document.getElementById('perfil-nome');
+    const emailExibicao = document.getElementById('perfil-email');
+
     try {
-        // 1. Carrega dados do perfil do usuário
+        // Chamada correta para a API no Render
         const resUser = await window.fetchProtected(`${API_BASE_URL}/perfil`);
+        
+        if (!resUser.ok) throw new Error("Erro no servidor");
+
         const user = await resUser.json();
         
-        document.getElementById('perfil-nome').textContent = user.name;
-        document.getElementById('perfil-email').textContent = user.email;
+        // Atualiza a interface com os dados reais
+        if (nomeExibicao) nomeExibicao.textContent = user.name;
+        if (emailExibicao) emailExibicao.textContent = user.email;
 
-        // 2. Carrega matérias para gerar estatísticas
-        const resMaterias = await window.fetchProtected(`${API_BASE_URL}/materia`);
-        const materias = await resMaterias.json();
+        await carregarEstatisticas();
+    } catch (err) {
+        console.error(err);
+        if (nomeExibicao) nomeExibicao.textContent = "Erro ao carregar";
+    }
+});
 
-        const total = materias.length;
-        // Consideramos concluída se a média atual >= meta
+async function carregarEstatisticas() {
+    try {
+        const res = await window.fetchProtected(`${API_BASE_URL}/materia`);
+        const materias = await res.json();
+
+        document.getElementById('stat-total').textContent = materias.length;
+        
         const concluidas = materias.filter(m => {
             const media = m.assessments.reduce((acc, av) => acc + (av.grade * av.weight), 0);
             return media >= m.passGrade;
         }).length;
 
-        document.getElementById('stat-total').textContent = total;
         document.getElementById('stat-concluidas').textContent = concluidas;
-
-    } catch (err) {
-        console.error("Erro ao carregar perfil:", err);
-    }
-});
-
-// Botão de Logout
-document.getElementById('btn-logout').addEventListener('click', () => {
-    localStorage.removeItem('token');
-    window.location.href = '/public/pages/login.html';
-});
+    } catch (e) { console.error(e); }
+}

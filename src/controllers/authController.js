@@ -90,3 +90,30 @@ exports.login = async (req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor ao tentar fazer login.' });
     }
 };
+
+// NOVA FUNÇÃO ADICIONADA:
+exports.obterPerfil = async (req, res) => {
+    try {
+        const studentId = req.student.studentId; 
+
+        const student = await prisma.student.findUnique({
+            where: { id: studentId },
+            select: {
+                studentName: true,
+                email: true
+            }
+        });
+
+        if (!student) {
+            return res.status(404).json({ error: "Estudante não encontrado." });
+        }
+
+        res.status(200).json({
+            name: student.studentName,
+            email: student.email
+        });
+    } catch (error) {
+        console.error('Erro ao buscar perfil:', error);
+        res.status(500).json({ error: 'Erro interno ao carregar perfil.' });
+    }
+};
