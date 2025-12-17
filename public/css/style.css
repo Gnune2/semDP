@@ -75,6 +75,7 @@ dialog {
     max-height: 85vh;
     margin: auto;
     color: white;
+    padding: 1em;
 }
 
 dialog::backdrop {
@@ -157,6 +158,31 @@ canvas {
     color: var(--cor-primaria);
 }
 
+/* Bordas Dinâmicas para os Cards */
+.card-passou {
+    border: 2px solid #2ecc71 !important;
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
+}
+
+.card-atencao {
+    border: 2px solid #f1c40f !important;
+    box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
+}
+
+.card-perigo {
+    border: 2px solid #e74c3c !important;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.2);
+}
+
+/* Efeito de Hover melhorado */
+.materias-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.materias-card:hover {
+    transform: translateY(-5px);
+}
+
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
@@ -164,7 +190,11 @@ canvas {
 
 /* Responsividade */
 @media screen and (max-width: 767px) {
-    .main h1 { font-size: 1.5rem; }
+    .card{
+        width: 80%;
+        margin-inline: auto;
+    }
+    .main h1 { font-size: 3rem; }
     dialog { padding: 1.5em; }
 }
 

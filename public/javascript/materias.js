@@ -111,3 +111,49 @@ function calcularMediaRealTime(passGrade) {
         document.getElementById('statusPassar').innerHTML = `<span class='badge bg-warning text-dark'>Faltam ${(passGrade - media).toFixed(2)}</span>`;
     }
 }
+
+function criarCardMateria(materia) {
+    const div = document.createElement("div");
+    div.className = "col-12 col-md-5 col-xl-3 p-2 mb-4";
+    div.id = `materia-${materia.id}`;
+    
+    // Cálculo da média atual para definir a cor da borda
+    const mediaAtual = materia.assessments.reduce((acc, av) => acc + (av.grade * av.weight), 0);
+    const passGrade = materia.passGrade;
+    
+    let classeBorda = "border-secondary"; // Padrão
+    if (mediaAtual >= passGrade) {
+        classeBorda = "card-passou";
+    } else if (mediaAtual >= (passGrade * 0.8)) { // Se estiver a 80% da meta
+        classeBorda = "card-atencao";
+    } else if (mediaAtual > 0) {
+        classeBorda = "card-perigo";
+    }
+
+    const imagemSrc = materia.image || '/public/assets/materias/padrao.png';
+
+    div.innerHTML = `
+        <div class="card h-100 bg-dark ${classeBorda} shadow materias-card" style="cursor: pointer;">
+            <img src="${imagemSrc}" class="card-img-top p-3" style="height: 120px; object-fit: contain;">
+            <div class="card-body text-center d-flex flex-column justify-content-between">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="card-title text-white m-0">${materia.name}</h5>
+                    <button class="btn btn-sm text-danger p-0 delete-btn"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+                <div class="mb-2">
+                    <small class="text-secondary d-block">Média Atual</small>
+                    <span class="fs-4 fw-bold ${mediaAtual >= passGrade ? 'text-success' : 'text-danger'}">
+                        ${mediaAtual.toFixed(2)}
+                    </span>
+                </div>
+                <button class="btn btn-outline-light btn-sm w-100 mt-2">Ver Detalhes</button>
+            </div>
+        </div>
+    `;
+
+    // Eventos (Delete e Abrir Modal) continuam iguais...
+    div.querySelector(".delete-btn").onclick = (e) => { e.stopPropagation(); eliminarMateria(materia.id); };
+    div.onclick = () => abrirEdicaoNotas(materia);
+
+    return div;
+}

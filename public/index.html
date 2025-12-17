@@ -21,7 +21,7 @@
     <header class="header p-3 border-bottom border-secondary mb-4">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="/public/index.html" class="logo">
-                <img src="/public/assets/logo2.png" alt="logo" style="height: 40px;">
+                <img src="/public/assets/logo2.png" alt="logo" style="height: 120px;">
             </a>
             <a href="pages/perfil.html" class="perfil text-white fs-4" id="fetch-profile">
                 <i class="fa-solid fa-circle-user"></i>
@@ -57,39 +57,52 @@
     </main>
 
     <dialog id="meuModal">
-        <div class="container text-white position-relative" style="max-width: 500px; padding-top: 30px;">
-            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-3 me-3" 
+        <div class="container text-white position-relative" style="max-width: 500px; padding-top: 25px;">
+            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-2 me-2" 
                 aria-label="Close" onclick="this.closest('dialog').close()"></button>
 
-            <h2 class="text-center mb-4">Configurar Disciplina</h2>
+            <h2 class="text-center mb-4">Nova Matéria</h2>
             
             <form id="create-subject-form">
-                <div class="row mb-3 text-start">
+                <div class="row mb-4 text-start">
                     <div class="col-7">
-                        <label class="form-label small">Nome da Cadeira</label>
-                        <input type="text" class="form-control bg-dark text-white border-secondary" id="inputName" required placeholder="Ex: Programação I">
+                        <label for="inputName" class="form-label">Nome da Disciplina</label>
+                        <input type="text" class="form-control bg-dark text-white border-secondary" id="inputName" name="name" required placeholder="Ex: Física II">
                     </div>
                     <div class="col-5">
-                        <label class="form-label small">Nota para Passar</label>
-                        <input type="number" class="form-control bg-dark text-white border-secondary" id="inputPassGrade" value="10.0" step="0.1" min="0" max="20" required>
+                        <label for="inputPassGrade" class="form-label">Média para Passar</label>
+                        <input type="number" class="form-control bg-dark text-white border-secondary" id="inputPassGrade" name="passGrade" value="6.0" step="0.1" min="0" max="10" required>
                     </div>
                 </div>
 
                 <div class="mb-4 text-start">
-                    <label class="form-label small">URL da Imagem (Opcional)</label>
-                    <input type="url" class="form-control bg-dark text-white border-secondary" id="inputImage" placeholder="https://...">
+                    <label for="inputImage" class="form-label">URL do Ícone (Opcional)</label>
+                    <input type="url" class="form-control bg-dark text-white border-secondary" id="inputImage" name="image">
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h5 class="m-0 text-info">Estrutura de Avaliação</h5>
-                    <button type="button" id="add-nota" class="btn btn-sm btn-outline-info">+ Add</button>
-                </div>
-                <p class="text-white-50 mb-3" style="font-size: 0.8rem;">* A soma dos pesos deve totalizar 1.0 (100%)</p>
+                <hr class="my-4">
+                <h4 class="mb-1 text-start">Configuração de Notas</h4>
+                <p class="text-white-50 small mb-3 text-start">* A soma dos pesos deve ser 1.0</p>
                 
                 <div id="notas">
-                    </div>
+                    <fieldset class="border p-3 mb-3 rounded border-secondary position-relative">
+                        <legend class="float-none w-auto px-2 fs-6 text-info d-flex justify-content-between align-items-center w-100">
+                            Avaliação 1
+                            <button type="button" class="btn-close btn-close-white btn-sm remove-nota"></button>
+                        </legend>
+                        <div class="row g-2">
+                            <div class="col-8">
+                                <input type="text" class="form-control bg-dark text-white border-secondary" name="assessmentName" value="Provas" required>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class="form-control bg-dark text-white border-secondary" name="assessmentWeight" value="0.6" step="0.1" min="0" max="1" required>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
 
-                <div class="d-grid mt-4">
+                <div class="d-grid gap-2 mt-4">
+                    <button type="button" id="add-nota" class="btn btn-sm btn-outline-info mb-3">Nova nota +</button>
                     <button type="submit" class="btn btn-primary btn-lg">Criar Matéria</button>
                 </div>
             </form>
