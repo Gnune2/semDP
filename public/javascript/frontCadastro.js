@@ -1,59 +1,67 @@
-// varre os dados inseridos pelo estudante e manda para o servidor
-//link do servidor node express
+// public/javascript/frontCadastro.js
+
+// Link do servidor (usa a variável global definida no config.js)
 const BACKEND_URL = `${API_BASE_URL}/cadastro`;
-//espera o html carregar para excutar o código seguinte
+
+// Espera o HTML carregar para executar o código
 document.addEventListener("DOMContentLoaded", () => {
-    //pega o formulário e atribui a uma variavel
+    
+    // Pega o formulário
     const cadastroForm = document.getElementById("cadastro-form");
-    //função assincrona (envia dados para o servidor) que executa quando o botão submit é clicado
+
+    // Função assíncrona que executa quando o botão submit é clicado
     cadastroForm.addEventListener("submit", async(event) => {
-        //desabilita a função padrão dos botões submit que faz a página recarregar
+        // Desabilita o recarregamento padrão da página
         event.preventDefault();
-        // função FormData que varre os dados do formulário
+
+        // Cria o objeto FormData com os dados do formulário
         const formData = new FormData(cadastroForm);
-        //array que guarda os dados necassários da variavel que armazenou os dados puxados pelo FormData
+
+        // --- CORREÇÃO AQUI ---
+        // Agora os nomes batem com os atributos 'name' do seu HTML e com o Backend
         const studentData = {
-            studentName: formData.get("nome"),
+            studentName: formData.get("studentName"), // Corrigido: antes era "nome"
             email: formData.get("email"),
-            password: formData.get("senha")
-        }
-        //variavel amarzena o botão submit
+            password: formData.get("password")        // Corrigido: antes era "senha"
+        };
+
+        // Seleciona o botão de submit para dar feedback visual
         const submitButton = cadastroForm.querySelector("button[type='submit']");
-        //feedback para o usúario
+        
+        // Feedback para o usuário
         submitButton.textContent = "A processar...";
-        //desabilita botao enquanto servidor processa as informações para para evitar bugs 
         submitButton.disabled = true;
-        //envia dados para servidor
+
         try {
-            //requisição dos dados na porta localhost:3000/cadastro
-            const response = await fetch(BACKEND_URL,{
-                //especifica o metodo usando na porta pq o padrão é get
-                method:"POST",
-                //explica que o tipó vai ser o json
+            // Envia dados para o servidor
+            const response = await fetch(BACKEND_URL, {
+                method: "POST",
                 headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify(studentData),// tranforma o array e json e envia no body
+                body: JSON.stringify(studentData), // Transforma o objeto em JSON
             });
-            // recebe a reposta do servidor e armazena numa variavel
-            const result = await response.json()
-            //mostra a reposta para o cliente pelo front
-            if (response.ok){
-                //sim eu coloquei o emoji pra ficar mais legal
-                alert('✅ Sucesso! ' + result.message + "\nAgora faça o login")
-                // Redirecionar para a página de login após o cadastro
-                window.location.href = '/public/pages/login.html';
-            }else{
+
+            // Recebe a resposta do servidor
+            const result = await response.json();
+
+            // Verifica se deu certo (Status 200-299)
+            if (response.ok) {
+                alert('✅ Sucesso! ' + result.message + "\nAgora faça o login");
+                // Redireciona para a página de login
+                window.location.href = '/public/pages/login.html'; // Verifique se este caminho está correto no seu servidor final
+            } else {
+                // Mostra o erro retornado pelo servidor (ex: "Email já utilizado")
                 alert('❌ Erro no Cadastro: ' + (result.error || 'Ocorreu um erro desconhecido.'));
             }
         } catch (error) {
-            // erro na conexao
+            // Erro de rede ou conexão recusada
             console.error('Erro de conexão ou requisição:', error);
-            alert(`🚨 Falha ao conectar ao servidor. Verifique se o backend está a correr (${API_BASE_URL}/login).` );
+            alert(`🚨 Falha ao conectar ao servidor. Verifique se o backend está rodando em: ${BACKEND_URL}`);
         } finally {
-            //Restaura o Botão, independentemente do sucesso ou falha
-            submitButton.textContent = 'Cadastrar';
+            // Restaura o botão, independentemente do sucesso ou falha
+            submitButton.textContent = 'Cadastrar-se';
             submitButton.disabled = false;
         }
-    })
-})
+    });
+});
