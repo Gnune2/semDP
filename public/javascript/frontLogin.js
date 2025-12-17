@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //sim eu coloquei o emoji pra ficar mais legal
             alert('✅' + result.message)
             // Redireciona para a página index
-            window.location.href = '/public/index.html';
+            window.location.href = '/index.html';
         }else{
             alert('❌ Erro no Login: ' + (result.error || 'Ocorreu um erro desconhecido.'));
         }

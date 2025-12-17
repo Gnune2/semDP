@@ -1,6 +1,6 @@
 :root {
     --cor-header: #0c1014;
-    --cor-fundo: #1C252F;
+    --cor-fundo: #111D2B;
     --cor-main: #111D2B;
     --cor-letra: white;
     --cor-primaria: #0d6efd; /* Azul Bootstrap para consistência */
@@ -31,7 +31,6 @@ body {
     justify-content: space-between;
     padding-inline: 1.5em;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo img {
@@ -187,7 +186,44 @@ canvas {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
 }
+.login {
+    background-color: #0c1014;
+    border-radius: 1em;
+    width: 30vh;
+    padding: 3em;
+}
 
+/* Fix para o Chrome não cortar o fundo do footer */
+footer {
+    background-color: #121212 !important;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+/* Efeito suave nos botões sociais */
+footer .btn-outline-light:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: #0d6efd !important; /* Cor primária do Bootstrap ao passar o rato */
+    transition: 0.3s;
+}
+
+/* Garante que o footer fique sempre no fundo da página se houver pouco conteúdo */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
 /* Responsividade */
 @media screen and (max-width: 767px) {
     .card{
