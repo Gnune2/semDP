@@ -1,6 +1,7 @@
 {
   "name": "semdp",
-  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
   "description": "calcula médias das matérias",
   "main": "src/server.js",
   "scripts": {
@@ -11,7 +12,6 @@
     "Medias, Notas, Faculdade"
   ],
   "author": "Guilherme Nunes",
-  "license": "MIT",
   "dependencies": {
     "@prisma/client": "^6.19.1",
     "bcrypt": "^6.0.0",
