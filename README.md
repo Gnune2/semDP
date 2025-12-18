@@ -8,66 +8,83 @@ O **SemDP** é a ferramenta definitiva para o universitário moderno. Um sistema
 
 ---
 
-## 📸 O Painel da Verdade (Screenshots)
+## ✨ Novidades da Versão 2.0
 
-*(Coloque aqui um print bem bonito do seu dashboard mostrando as notas)*
+### 🌐 Link (domínio) do Projeto
+* O sistema está disponível online em: **[https://semdp.com.br](https://semdp.com.br)**.
 
----
+### 👤 Perfil do Aluno & Estatísticas
+* **Dashboard Pessoal:** Visualize seus dados de cadastro e acompanhe seu progresso acadêmico em um só lugar.
+* **Contador de Matérias:** Veja em tempo real o total de disciplinas matriculadas e quantas já foram concluídas com sucesso.
 
-## ✨ O que dá pra fazer?
+### 🎨 Visual Dinâmico & Interativo
+* **Cards Inteligentes:** As bordas das matérias mudam de cor (Verde, Amarelo ou Vermelho) baseadas na sua média atual.
+* **Efeito de Confete:** Comemore suas vitórias! O sistema dispara confetes ao atingir a meta de aprovação no simulador.
 
-### 🔐 Área VIP (Autenticação)
-* **Sem penetras:** Cadastro e Login blindados.
-* **Segurança de Banco:** Usamos **JWT** (porque cookie é só o que a gente come no intervalo) e senhas criptografadas com **Bcrypt** (nem o admin sabe sua senha).
-
-### 📚 Vida Acadêmica Organizada
-* **Adeus Planilhas Feias:** Um dashboard limpo para ver todas as suas matérias.
-* **Personalização:** Dê nome aos bois (ou às matérias) e escolha ícones.
-* **Calculadora da Esperança:** Configure pesos diferentes para provas e trabalhos. O sistema faz a conta chata por você.
-* **Tudo Salvo:** Seus dados moram no **MongoDB**. Pode fechar a aba que a nota não some.
+### 🛠️ Melhorias Técnicas
+* **Deploy na HostGator:** Estrutura otimizada para rodar em servidores de produção com suporte a `.htaccess` e Node.js via cPanel.
+* **Rodapé Profissional:** Navegação facilitada com links externos para redes sociais abrindo em novas abas.
 
 ---
 
 ## 🛠️ Tecnologias (O motor debaixo do capô)
 
-Este projeto não é só um rostinho bonito. Tem código de gente grande rodando aqui:
-
 | Área | Tech | Pra que serve? |
 | :--- | :--- | :--- |
 | **Cérebro (Backend)** | ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white) | Onde a mágica acontece. |
 | **Rotas** | ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB) | O guarda de trânsito das requisições. |
-| **Memória (DB)** | ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=flat&logo=mongodb&logoColor=white) | Banco NoSQL (porque a vida não é relacional). |
-| **Tradutor (ORM)** | ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=flat&logo=Prisma&logoColor=white) | Facilita a conversa com o banco de dados. |
-| **Visual (Frontend)** | ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white) | A parte que você vê e clica. |
-| **Estilo** | ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=flat&logo=bootstrap&logoColor=white) | Pra deixar tudo responsivo e bonitão. |
+| **Memória (DB)** | ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=flat&logo=mongodb&logoColor=white) | Banco NoSQL para persistência de dados. |
+| **Tradutor (ORM)** | ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=flat&logo=Prisma&logoColor=white) | Facilita a comunicação entre o Node e o Banco. |
+| **Build** | ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white) | Bundle de frontend rápido e otimizado. |
 
 ---
 
 ## 🧩 Como os dados se relacionam?
 
-Basicamente: Um **Aluno** sofre com várias **Matérias**, e cada Matéria tem várias **Avaliações** para testar a sanidade do Aluno.
-
 ```mermaid
 erDiagram
-    ALUNO ||--o{ MATERIA : "tenta passar em"
-    MATERIA ||--o{ AVALIACAO : "tem"
+    ALUNO ||--o{ MATERIA : "gerencia"
+    MATERIA ||--o{ AVALIACAO : "possui"
     
     ALUNO {
         String id PK
-        String email "Onde chega o boleto"
-        String password "Hash ultra secreto"
-        String studentName
+        String email "Login do estudante"
+        String password "Hash Bcrypt"
+        String studentName "Nome completo"
     }
     MATERIA {
         String id PK
-        String name "Ex: Cálculo I"
-        String image "Ícone bonito"
+        String name "Ex: Algoritmos"
+        Float passGrade "Meta (Ex: 6.0)"
         String studentId FK
     }
     AVALIACAO {
         String id PK
-        String name "Ex: P1"
-        Float grade "A nota (ai que dor)"
-        Float weight "O peso na média"
+        Float grade "Nota obtida"
+        Float weight "Peso da avaliação"
         String subjectId FK
     }
+```
+
+## 📸Screenshots
+
+![Painel da Verdade](./screenshots/Screenshot_1.png)
+![Painel da Verdade](./screenshots/Screenshot_2.png)
+![Painel da Verdade](./screenshots/Screenshot_3.png)
+![Painel da Verdade](./screenshots/Screenshot_4.png)
+![Painel da Verdade](./screenshots/Screenshot_5.png)
+
+---
+## 🚀 Como Iniciar
+
+1. **Instalação**: Instale todas as dependências do projeto executando `npm install` no terminal da pasta raiz.
+2. **Configuração**: Configure o arquivo `.env` (ou variáveis de ambiente no painel do host) com a sua `DATABASE_URL` do MongoDB/MySQL e o `JWT_SECRET` para autenticação.
+3. **Build**: Gere a pasta de produção executando `npm run build`. Certifique-se de que o `index.html` está na raiz para evitar erros de resolução.
+4. **Deploy**:
+   - Suba o conteúdo da pasta `dist` para a `public_html` da HostGator.
+   - Configure o arquivo `.htaccess` para suportar as rotas do Vite.
+   - Inicie o servidor Node.js através do painel "Setup Node.js App" do cPanel.
+
+---
+
+**Desenvolvido por [Guilherme Nunes](https://github.com/seu-usuario).**
