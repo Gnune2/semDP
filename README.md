@@ -68,12 +68,20 @@ erDiagram
 
 ## 📸Screenshots
 
-![Painel da Verdade](./screenshots/Screenshot_1.png)
-![Painel da Verdade](./screenshots/Screenshot_2.png)
-![Painel da Verdade](./screenshots/Screenshot_3.png)
-![Painel da Verdade](./screenshots/Screenshot_4.png)
-![Painel da Verdade](./screenshots/Screenshot_5.png)
+Originais individuais no Drive privado; entre na conta autorizada para visualizar.
+
+- [Screenshot 1 — abrir original no Drive](https://drive.google.com/file/d/1IFDmLD54te2TrZcD_SH_EBVGl17M1OFK/view)
+- [Screenshot 2 — abrir original no Drive](https://drive.google.com/file/d/1-ixlUIRKgR7m0nZDBgpoOgspcGvKdHzc/view)
+- [Screenshot 3 — abrir original no Drive](https://drive.google.com/file/d/1XGKRgQeJbCm4hWbdmjyvU1jY6NnrfEkv/view)
+- [Screenshot 4 — abrir original no Drive](https://drive.google.com/file/d/1w7isT6cGRnupPx_r03OyW6l6FCd6nsFK/view)
+- [Screenshot 5 — abrir original no Drive](https://drive.google.com/file/d/1O6GdzD9qb9yvDBsHSd5Ls17P5EA8TAOC/view)
 
 ---
 
 **Desenvolvido por [Guilherme Nunes](https://github.com/seu-usuario).**
+
+## Acervo no Google Drive
+
+Os screenshots de documentação foram movidos para o Drive como originais individuais. [Abra o catálogo e as instruções de recuperação](acervo/CATALOGO.md), com os IDs, caminhos anteriores e verificação SHA-256.
+
+`git pull --ff-only` atualiza os códigos e o catálogo; faça uma cópia externa dos screenshots antes do primeiro pull com esta migração se quiser mantê-los offline. Para enviar código, confira `git status`, faça o commit das fontes e use `git push`. Os anexos migrados são ignorados pelo Git e podem ser restaurados nos caminhos antigos com `acervo/migracao.py`.
